@@ -1,0 +1,30 @@
+{
+  "name": "dmitriymikheev/yii2-odysseq",
+  "description": "The toolkit of integration Odysseq service in your project for Yii2",
+  "keywords": ["yii2", "yii-2", "yii2-extension", "payment", "odysseq", "e-commerce", "merchant", "dmitriymikheev"],
+  "homepage": "https://github.com/dmitriymikheev/yii2-odysseq",
+  "type": "yii2-extension",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/dmitriymikheev/yii2-odysseq/issues",
+    "source": "https://github.com/dmitriymikheev/yii2-odysseq",
+    "email": "dimamiheev92@gmail.com"
+  },
+  "authors": [
+    {
+      "name": "Dmitriy Mikheev",
+      "email": "dimamiheev92@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.6.0",
+    "yiisoft/yii2": "~2.0.0",
+    "yiisoft/yii2-httpclient": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "dmitriymikheev\\odysseq\\": "src"
+    }
+  }
+}
