@@ -51,22 +51,17 @@ class CallbackAction extends Action
     public function run()
     {
         $request = Yii::$app->getRequest();
-        $data = Json::decode($request->rawBody);
-        $headers = $request->getHeaders();
-        $signature = $headers->get('x-api-signature-sha256');
+        $signature = $request->getHeaders()->get('x-api-signature-sha256');
         if (!$signature) {
             throw new BadRequestHttpException();
         }
-        if (isset($data['orderId'], $data['status'], $data['amount'])) {
-            $model = new CallbackForm();
-            $model->load($data);
-            if (!$model->validate() || !Yii::$app->get($this->component_id)->validateSignature($signature, $data)) {
-                if ($model->hasErrors()) Yii::error(print_r($model->getErrors(), true));
-                throw new BadRequestHttpException('Data is corrupted.');
-            }
-
-            call_user_func($this->callback, $model);
+        $data = Json::decode($request->rawBody);
+        $model = new CallbackForm();
+        $model->load($data);
+        if(!$model->validate() || !Yii::$app->get($this->component_id)->validateSignature($signature, $data)){
+            throw new BadRequestHttpException('Data is corrupted.');
         }
-        throw new BadRequestHttpException();
+
+        call_user_func($this->callback, $model);
     }
 }

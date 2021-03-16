@@ -65,6 +65,7 @@ class CallbackForm extends Model
     public function rules()
     {
         return [
+            [['orderId', 'status', 'amount'], 'required'],
             [['orderId', 'amount', 'errorCode', 'errorMessage'], 'string'],
             ['type', 'in', 'range' => $this->getTypeItems()],
             ['status', 'in', 'range' => $this->getStatusItems()],
