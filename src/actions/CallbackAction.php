@@ -55,10 +55,12 @@ class CallbackAction extends Action
         if (!$signature) {
             throw new BadRequestHttpException();
         }
+
         $data = Json::decode($request->rawBody);
-        $model = new CallbackForm();
+        $model = new CallbackForm;
         $model->load($data);
-        if(!$model->validate() || !Yii::$app->get($this->component_id)->validateSignature($signature, $data)){
+
+        if (!$model->validate() || !Yii::$app->get($this->component_id)->validateSignature($signature, $data)) {
             throw new BadRequestHttpException('Data is corrupted.');
         }
 

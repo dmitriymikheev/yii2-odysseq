@@ -306,14 +306,16 @@ class OdysseqComponent extends BaseObject
             ->setUrl($this->api_url)
             ->setData($params)
             ->send();
-        if ($response->isOk) {
-            if ($response->data) {
-                return $response->data;
-            } else {
-                throw new ServerErrorHttpException('Empty data returned.');
-            }
+
+        if (!$response->isOk) {
+            throw new ServerErrorHttpException('Odysseq responded with status code: '.$response->getStatusCode());
         }
-        throw new ServerErrorHttpException('Odysseq responded with status code: '.$response->getStatusCode());
+
+        if (!$response->data) {
+            throw new ServerErrorHttpException('Empty data returned.');
+        }
+
+        return $response->data;
     }
 
     /**
